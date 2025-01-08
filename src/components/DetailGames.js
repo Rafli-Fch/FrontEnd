@@ -1,11 +1,18 @@
 import React from "react";
-import "../style/menu.css"
+import axios from "axios";
+import "../style/menu.css";
 
 const DetailGames = ({ isOpen, onClose, value, data }) => {
+  const gameData = data.find((game) => game.id === value);
 
-  const gameData = data.find((game) => game.id === value)
+  if (!isOpen || !gameData) return null;
 
-  if (!isOpen) return null;
+  const addToCart = () => {
+    axios
+      .post("http://localhost:8000/api/cart", { game_id: gameData.id })
+      .then(() => alert("Game berhasil ditambahkan ke keranjang"))
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div className="x-popup-overlay">
@@ -31,10 +38,18 @@ const DetailGames = ({ isOpen, onClose, value, data }) => {
               <div className="x-dg-rincian">
                 <h5 className="x-dg-rincian-title">Rincian Game</h5>
                 <ul>
-                  <li className="x-dg-rincian-list">Nama : {gameData.tittle}</li>
-                  <li className="x-dg-rincian-list">Genre : {gameData.kategori.join(', ')}</li>
-                  <li className="x-dg-rincian-list">Pengembang : {gameData.pengembang}</li>
-                  <li className="x-dg-rincian-list">Penerbit : {gameData.penerbit}</li>
+                  <li className="x-dg-rincian-list">
+                    Nama : {gameData.tittle}
+                  </li>
+                  <li className="x-dg-rincian-list">
+                    Genre : {gameData.kategori.join(", ")}
+                  </li>
+                  <li className="x-dg-rincian-list">
+                    Pengembang : {gameData.pengembang}
+                  </li>
+                  <li className="x-dg-rincian-list">
+                    Penerbit : {gameData.penerbit}
+                  </li>
                 </ul>
               </div>
               <div className="x-dg-co">
@@ -50,5 +65,4 @@ const DetailGames = ({ isOpen, onClose, value, data }) => {
   );
 };
 
-
-export default DetailGames
+export default DetailGames;
