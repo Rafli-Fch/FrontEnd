@@ -64,9 +64,9 @@ const NewsMenu = ({ data, onClick, id }) => {
                 <div className="flex justify-center align-center">
                     <img src={x.img} alt="" className="w-full h-[350px]" />
                 </div>
-                <div className="x-card-harga absolute bottom-2 right-2 bg-opacity-50 px-3 py-1 rounded 
+                <div className="x-card-harga absolute bottom-2 right-2 bg-opacity-50 px-1 py-1 rounded 
                     hover:bg-opacity-80 hover:bg-gray-800 transition-all duration-300">
-                    <span className="text-black font-bold text-lg 
+                    <span className="text-white text-lg 
                         hover:text-white">
                         Rp {x.harga}
                     </span>
